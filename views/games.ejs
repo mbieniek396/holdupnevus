@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holdup Nevus | Games</title>
 
-    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/games.css">
 </head>
 <body>
     <% matches.forEach( match => { %>
-        <% var losers = [] 
-        var winners = []
+        <% let index = matches.indexOf(match);
+        let losers = [] 
+        let winners = []
         match.info.participants.forEach( info => {
             if (info.win === false){
                 losers.push(info)
@@ -20,13 +22,15 @@
             }
         }) %>
 
+        
         <section class="wrapMatch">
+        <a href="/game/<%= index %>">
             <section class="winnersWrap">
                 <% winners.forEach( info => {%>
                     <section>
-                        <% let role = info.teamPosition;
+                        <% let role = info.individualPosition;
                         if (info.teamPosition === "UTILITY") { role="SUPPORT"} %>
-                        <p><%= role %> -></p>
+                        <img src="/img/roles/<%= role %>.png" width="50" height="50">
                         <p><%= info.summonerName %></p>
                     </section>
                 <%})%>
@@ -36,13 +40,14 @@
                     <section>
                         <% let role = info.teamPosition;
                         if (info.teamPosition === "UTILITY") { role="SUPPORT"} %>
-                        <p><%= role %> -></p>
+                        <img src="/img/roles/<%= role %>.png" width="50" height="50">
                         <p><%= info.summonerName %></p>
                     </section>
                 <%})%>
             </section>
-            
+        </a>  
         </section>
+        
     <%})%>
 
 

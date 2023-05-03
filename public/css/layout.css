@@ -11,39 +11,3 @@ body{
     color:rgb(160, 208, 255);
 }
 
-.wrapMatch{
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-evenly;
-    border: 2px solid black;
-}
-
-.winnersWrap, .losersWrap{
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: .5rem;
-    font-weight: 800;
-}
-
-.winnersWrap section, .losersWrap section{
-    display: flex;
-    justify-content: space-evenly;
-    gap: 1rem;
-}
-
-
-.winnersWrap{
-    background-color: rgb(34, 119, 229);
-    border-right: 2px solid black;
-    text-shadow: 0 0 3px black;
-}
-
-.losersWrap{
-    background-color: rgb(232, 31, 31);
-    color:rgb(16, 17, 17);
-    text-shadow: 0 0 3px white;
-    
-}
