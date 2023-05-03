@@ -1,0 +1,18 @@
+{
+  "name": "holdup-nevus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mateusz Bieniek & Tomasz Firlej",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.6.6"
+  }
+}

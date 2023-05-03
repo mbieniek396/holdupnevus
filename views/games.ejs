@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holdup Nevus | Games</title>
+
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+    <% matches.forEach( match => { %>
+        <% var losers = [] 
+        var winners = []
+        match.info.participants.forEach( info => {
+            if (info.win === false){
+                losers.push(info)
+            }else{
+                winners.push(info)
+            }
+        }) %>
+
+        <section class="wrapMatch">
+            <section class="winnersWrap">
+                <% winners.forEach( info => {%>
+                    <section>
+                        <% let role = info.teamPosition;
+                        if (info.teamPosition === "UTILITY") { role="SUPPORT"} %>
+                        <p><%= role %> -></p>
+                        <p><%= info.summonerName %></p>
+                    </section>
+                <%})%>
+            </section>
+            <section class="losersWrap">
+                <% losers.forEach( info => {%>
+                    <section>
+                        <% let role = info.teamPosition;
+                        if (info.teamPosition === "UTILITY") { role="SUPPORT"} %>
+                        <p><%= role %> -></p>
+                        <p><%= info.summonerName %></p>
+                    </section>
+                <%})%>
+            </section>
+            
+        </section>
+    <%})%>
+
+
+</body>
+</html>
