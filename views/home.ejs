@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holdup Nevus</title>
+
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+
+    <main>
+        <h1>Holdup Nevus</h1>
+    </main>
+    
+    <div>
+        
+    </div>
+
+    <section class="contactUs">
+
+
+            <input type="text" id="who" placeholder="From who" required>
+            <input type="email" id="mail" placeholder="Email adress" required>
+            <textarea id="message" rows="5" cols="30" placeholder="Message" required></textarea>
+            <button id="submit">Send</button>
+
+        <script>
+            let btn = document.getElementById("submit");
+            let who = document.getElementById("who");
+            let mail = document.getElementById("mail");
+            let msg = document.getElementById("message");
+
+            btn.addEventListener('click', () => {
+
+                // TODO: check if email is correct
+
+                fetch('http://localhost:8003/sendContactMessage', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ "who": who.value, "mail": mail.value, "message": msg.value})
+                })
+                .then(response => {
+                    if (response.status == 200){
+                        window.alert("Message sent succesfully!")
+                    }else{
+                        window.alert("Message was NOT sent!")
+                    }
+                    who.value = "";
+                    mail.value = "";
+                    msg.value = "";
+                })
+            })
+        </script>
+
+    </section>
+    
+</body>
+</html>

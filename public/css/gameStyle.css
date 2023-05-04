@@ -20,11 +20,13 @@
     padding: 0 0.5rem;
 }
 
-.summs{
+.summs, .runes{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
+
 
 
 .playerRows img, .emptyItem, .containChampionIcon{

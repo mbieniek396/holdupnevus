@@ -13,21 +13,27 @@
 <body>
 
     <% /////// Champions
-    let champIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/champion/"
-    let chamIconSize = 50
+    let champIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/champion/";
+    let chamIconSize = 50;
     //Items
-    let itemIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/item/"
-    let itemIconSize = 35 
+    let itemIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/item/";
+    let itemIconSize = 35; 
     
     /// Summs
-    let summsIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/spell/"
-    let summsIconSize = 25 
+    let summsIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/spell/";
+    let summsIconSize = 25;
+    
+    /// Runes
+    let runesIconLink = "https://ddragon.canisback.com/img/";
+    let runesIconSize = 25;
     %>
 
     
         <article class="matchWrapper">
             <section class="info">
-                <p><%= match.metadata.matchId %></p>
+                <% let gH = Math.trunc(match.info.gameDuration/60)
+                let gM = match.info.gameDuration - gH * 60 %>
+                <p><%= match.metadata.matchId %> | <%= gH %>:<%= gM %></p>
             </section>
             <%let losers = [] 
             let winners = []
@@ -51,6 +57,13 @@
                             <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
                         src="<%= summsIconLink %><%= summs[player.summoner2Id]%>">
                         </section>
+                        <section class="runes">
+                            <img width="<%= runesIconSize %>" height="<%= runesIconSize %>"
+                        src="<%= runesIconLink %><%= runes[player.perks.styles[0].selections[0].perk] %>">
+                            <img width="<%= runesIconSize-8 %>" height="<%= runesIconSize-8 %>"
+                        src="<%= runesIconLink %><%= runes[player.perks.styles[1].style] %>">
+                        </section>
+                        
                         <p class="championLevel centerContent textSize1_5"><%= player.champLevel %></p>
                         <div class="containChampionIcon" style="width: <%= chamIconSize %>px; height: <%= chamIconSize %>px;">
                         <img width="<%= chamIconSize %>" height="<%= chamIconSize %>" title="<%= player.championName %>"
@@ -90,6 +103,13 @@
                             <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
                         src="<%= summsIconLink %><%= summs[player.summoner2Id]%>">
                         </section>
+                        <section class="runes">
+                            <img width="<%= runesIconSize %>" height="<%= runesIconSize %>"
+                        src="<%= runesIconLink %><%= runes[player.perks.styles[0].selections[0].perk] %>">
+                            <img width="<%= runesIconSize-8 %>" height="<%= runesIconSize-8 %>"
+                        src="<%= runesIconLink %><%= runes[player.perks.styles[1].style] %>">
+                        </section>
+
                         <p class="championLevel centerContent textSize1_5"><%= player.champLevel %></p>
                         <div class="containChampionIcon" style="width: <%= chamIconSize %>px; height: <%= chamIconSize %>px;">
                         <img width="<%= chamIconSize %>" height="<%= chamIconSize %>" title="<%= player.championName %>"

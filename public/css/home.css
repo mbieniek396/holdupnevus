@@ -1,0 +1,27 @@
+*{
+    margin:0 ;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    
+    background-color: blanchedalmond;
+    
+}
+
+main{
+    background-color: rgb(39, 40, 40);
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+h1{
+    font-size: 8rem;
+}
+
+div{
+    height: 1000px;
+    width: 100%;
+}
