@@ -21,9 +21,9 @@
     <section class="contactUs">
 
 
-            <input type="text" id="who" placeholder="From who" required>
-            <input type="email" id="mail" placeholder="Email adress" required>
-            <textarea id="message" rows="5" cols="30" placeholder="Message" required></textarea>
+            <input type="text" id="who" placeholder="From who">
+            <input type="text" id="mail" placeholder="Email adress">
+            <textarea id="message" rows="5" cols="30" placeholder="Message"></textarea>
             <button id="submit">Send</button>
 
         <script>
@@ -33,8 +33,22 @@
             let msg = document.getElementById("message");
 
             btn.addEventListener('click', () => {
+                
+                /// Check if values are not empty
+                if (!who.value){
+                    return;
+                }
+                if (!mail.value){
+                    return;
+                }
+                if (!msg.value){
+                    return;
+                }
 
-                // TODO: check if email is correct
+                // Check if email has @ in it
+                if (!mail["value"].includes("@")){
+                    return;
+                }
 
                 fetch('http://localhost:8003/sendContactMessage', {
                     method: 'POST',

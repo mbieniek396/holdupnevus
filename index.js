@@ -23,7 +23,7 @@ const app = express()
 /////////////////////////////////////////////////////////
 const REFRESH_TIME_MINUTES = 1
 const REFRESH_TIME_MILISECONDS = REFRESH_TIME_MINUTES*60000
-const riotKey = "RGAPI-1bf767b8-39f6-42b6-90ed-a21cfd57b887";
+const riotKey = require('./riotKey.js');
 
 /////////////////////////////////////////////////////////
 ///////////// GLOBAL THINGS TO USE //////////////////////
@@ -277,6 +277,7 @@ app.listen(8003, () =>{
     console.log("latest refresh time: "+lastRefreshTime);
     console.log(`From last update passed: ${new Date() - lastRefreshTime}ms`);
     console.log(`Today is ${new Date()}`);
+    console.log(riotKey);
     initMatchesData();
     loadSummonerSpellsObject();
     loadRunesObject();
