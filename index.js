@@ -13,16 +13,17 @@ const app = express()
 /////////////////////////////////////////////////////////
 
 
-/// TODO: Asynchroniczna petla odświeżająca co jakiś czas sama z siebie
-
-
 
 
 /////////////////////////////////////////////////////////
 ///////////// REFRESH SETTINGS //////////////////////////
 /////////////////////////////////////////////////////////
-const REFRESH_TIME_MINUTES = 1
-const REFRESH_TIME_MILISECONDS = REFRESH_TIME_MINUTES*60000
+const MIN_REFRESH_TIME = 1
+const LOOP_REFRESH_TIME = 20
+
+////////////////////////////////////////////////////
+const REFRESH_TIME_MILISECONDS = MIN_REFRESH_TIME*60000
+const LOOP_REFRESH_TIME_MILISECONDS = LOOP_REFRESH_TIME*60000
 const riotKey = require('./riotKey.js');
 
 /////////////////////////////////////////////////////////
@@ -74,6 +75,16 @@ async function loadSummonerSpellsObject(){
         summs[response["data"][k].key] = response["data"][k].image.full
     }
     console.log("Summoner spells library loaded succesfully!")
+}
+
+/////////////////////////////////////////////////////////
+///////////////// REFRESH LOOP //////////////////////////
+/////////////////////////////////////////////////////////
+async function refreshLoop(){
+    while(true){
+        await new Promise(res => setTimeout(res, LOOP_REFRESH_TIME_MILISECONDS));
+        refreshMatchesData();
+    }
 }
 
 
@@ -142,7 +153,6 @@ async function refreshMatchesData(){
         for (el of matchesData){
             tempData.push(el)
         }
-        console.log(matchesData);
         matchesData = tempData;
         console.log(`Data succesfully refreshed! Added ${count} records!`)
         
@@ -274,13 +284,11 @@ app.use(express.json());
 
 app.listen(8003, () =>{
     console.log("Server started, currently listening on http://localhost:8003");
-    console.log("latest refresh time: "+lastRefreshTime);
-    console.log(`From last update passed: ${new Date() - lastRefreshTime}ms`);
-    console.log(`Today is ${new Date()}`);
-    console.log(riotKey);
+    console.log(`Server started on ${new Date()}`);
     initMatchesData();
     loadSummonerSpellsObject();
     loadRunesObject();
+    refreshLoop();
 });
 
 
