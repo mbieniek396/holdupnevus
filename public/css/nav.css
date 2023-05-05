@@ -1,0 +1,32 @@
+nav{
+    position: fixed;
+    top:0;
+    left:0;
+    min-height: 4rem;
+    background-color: var(--secondary-color);
+    z-index: 10;
+    width: 100%;
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .links{
+    display:flex;
+    align-items: center;
+    gap:2rem;
+}
+
+nav .links a, nav .links a:active, nav .links a:visited{
+    display: block;
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: all 0.3s ease-in-out;
+}
+
+nav .links a:hover, nav .links a:focus{
+    font-size: 1.2rem;
+    filter: brightness(1.2);
+}

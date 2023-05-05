@@ -110,7 +110,7 @@ async function refreshMatchesData(){
         await new Promise(res => setTimeout(res, 1000)); //Await for 1 sec cause of 20calls per sec limit
         await new Promise( (resolve) => {
             Array.from(matches).forEach( async match => {
-                if (!matchNameList.includes(match.metadata.matchId)){
+                if (!matchNameList.includes(match)){
                     response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${riotKey}`);
                     if (response.status != 200){
                         console.error("Could not load data from game "+match);
@@ -347,10 +347,6 @@ app.post('/sendContactMessage', (req, res) =>{
         res.status(200).send();
     });
 })
-
-app.get("/notFound", (req, res) => {
-    res.render('notFound');
-});
 
 
 app.use((req, res) => {

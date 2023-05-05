@@ -10,8 +10,17 @@
     <link rel="stylesheet" href="/css/games.css">
 </head>
 <body>
+
+    <% function teamTemplate(role, name) {
+    return `<section>
+        <img src="/img/roles/${role}.png" width="50" height="50">
+        <p>${name}</p>
+    </section>`;
+    }
+    %>
+
     <% matches.forEach( match => { %>
-        <%
+        <% ///// Dividing players for winners and losers /////
         let losers = [] 
         let winners = []
         match.info.participants.forEach( info => {
@@ -27,20 +36,12 @@
         <a href="/game/<%= match.metadata.matchId %>">
             <section class="winnersWrap">
                 <% winners.forEach( info => {%>
-                    <section>
-                        <% let role = info.teamPosition; %>
-                        <img src="/img/roles/<%= role %>.png" width="50" height="50">
-                        <p><%= info.summonerName %></p>
-                    </section>
+                    <%- teamTemplate(info.teamPosition, info.summonerName) %>
                 <%})%>
             </section>
             <section class="losersWrap">
                 <% losers.forEach( info => {%>
-                    <section>
-                        <% let role = info.teamPosition; %>
-                        <img src="/img/roles/<%= role %>.png" width="50" height="50">
-                        <p><%= info.summonerName %></p>
-                    </section>
+                    <%- teamTemplate(info.teamPosition, info.summonerName) %>
                 <%})%>
             </section>
         </a>  

@@ -7,71 +7,121 @@
     <title>Holdup Nevus</title>
 
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
 
-    <main>
-        <h1>Holdup Nevus</h1>
-    </main>
+    <nav>
+        <h2>HoldupNevus</h2>
+        <section class="links">
+            <a href="#main">Home</a>
+            <a href="#aboutUs">About us</a>
+            <a href="#">Members</a>
+            <a href="#">Games</a>
+            <a href="#contactUs">Contact us</a>
+        </section>
+    </nav>
+
     
-    <div>
-        
-    </div>
-
-    <section class="contactUs">
-
-
-            <input type="text" id="who" placeholder="From who">
-            <input type="text" id="mail" placeholder="Email adress">
-            <textarea id="message" rows="5" cols="30" placeholder="Message"></textarea>
-            <button id="submit">Send</button>
-
-        <script>
-            let btn = document.getElementById("submit");
-            let who = document.getElementById("who");
-            let mail = document.getElementById("mail");
-            let msg = document.getElementById("message");
-
-            btn.addEventListener('click', () => {
-                
-                /// Check if values are not empty
-                if (!who.value){
-                    return;
-                }
-                if (!mail.value){
-                    return;
-                }
-                if (!msg.value){
-                    return;
-                }
-
-                // Check if email has @ in it
-                if (!mail["value"].includes("@")){
-                    return;
-                }
-
-                fetch('http://localhost:8003/sendContactMessage', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ "who": who.value, "mail": mail.value, "message": msg.value})
-                })
-                .then(response => {
-                    if (response.status == 200){
-                        window.alert("Message sent succesfully!")
-                    }else{
-                        window.alert("Message was NOT sent!")
-                    }
-                    who.value = "";
-                    mail.value = "";
-                    msg.value = "";
-                })
-            })
-        </script>
-
+    <section class="main" id="main">
+        <h1 class="mainTitle">Holdup Nevus</h1>
+        <img class="mainTitleBG" src="/img/webPhotos/teamfoto.avif" width="500" height="500">
     </section>
-    
+    <main>
+
+        <section class="aboutUs" id="aboutUs">
+            <section class="aboutUsItem">
+                <img src="/img/webPhotos/groupIcon.png" width="300" height="300">
+                <article>
+                    <h2>Członkowie</h2>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                </article>
+            </section>
+            <section class="aboutUsItem">
+                <article>
+                    <h2>Co robimy?</h2>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                </article>
+                <img src="/img/webPhotos/whatWeDo.png" width="300" height="300">
+            </section>
+        </section>
+
+        <div class="div">
+        </div>
+
+        <section class="contactUs" id="contactUs">
+                <article>
+                    <h1>Contact us!</h1>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                </article>
+                
+                <aside>
+                    <div class="item">
+                        <label for="who" class="hide">Od kogo</label>
+                        <input type="text" id="who" placeholder="From who">
+                    </div>
+                    <div class="item">
+                        <label for="mail" class="hide">Kontaktowy adres email</label>
+                        <input type="text" id="mail" placeholder="Email adress">
+                    </div>
+                    <div class="item">
+                        <label for="message" class="hide">Treść wiadomości</label>
+                        <textarea id="message" rows="7" cols="30" placeholder="Message"></textarea>
+                    </div>
+                    <button id="submit">Send</button>
+                </aside>
+
+        </section>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+
+    <script>
+        let btn = document.getElementById("submit");
+        let who = document.getElementById("who");
+        let mail = document.getElementById("mail");
+        let msg = document.getElementById("message");
+
+        btn.addEventListener('click', () => {
+            
+            /// Check if values are not empty
+            if (!who.value){
+                return;
+            }
+            if (!mail.value){
+                return;
+            }
+            if (!msg.value){
+                return;
+            }
+
+            // Check if email has @ in it
+            if (!mail["value"].includes("@")){
+                return;
+            }
+
+            fetch('http://localhost:8003/sendContactMessage', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "who": who.value, "mail": mail.value, "message": msg.value})
+            })
+            .then(response => {
+                if (response.status == 200){
+                    window.alert("Message sent succesfully!")
+                }else{
+                    window.alert("Message was NOT sent!")
+                }
+                who.value = "";
+                mail.value = "";
+                msg.value = "";
+            })
+        })
+    </script>
 </body>
 </html>

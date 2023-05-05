@@ -12,7 +12,49 @@
 </head>
 <body>
 
-    <% /////// Champions
+    <% 
+    function playerRowsTemplate(player){
+        let items = ``;
+        for (let i=0; i<7; i++){
+            if (player["item"+i] != 0) {
+            items+=`<img width="${itemIconSize}" height="${itemIconSize}"
+        src="${itemIconLink}${player["item"+i]}.png">`
+            }else{
+                items+=`<div class="emptyItem" style="width: ${itemIconSize}px;
+                 height: ${itemIconSize}px;"></div>`
+            }
+        }
+
+        return `<section class="playerRows">
+            <section class="summs">
+                <img width="${summsIconSize}" height="${summsIconSize}"
+            src="${summsIconLink}${summs[player.summoner1Id]}">
+                <img width="${summsIconSize}" height="${summsIconSize}"
+            src="${summsIconLink}${summs[player.summoner2Id]}">
+            </section>
+            <section class="runes">
+                <img width="${runesIconSize}" height="${runesIconSize}"
+            src="${runesIconLink}${runes[player.perks.styles[0].selections[0].perk]}">
+                <img width="${runesIconSize-8}" height="${runesIconSize-8}"
+            src="${runesIconLink}${runes[player.perks.styles[1].style]}">
+            </section>
+            
+            <p class="championLevel centerContent textSize1_5">${player.champLevel}</p>
+            <div class="containChampionIcon" style="width: ${chamIconSize}px; height: ${chamIconSize}px;">
+            <img width="${chamIconSize}" height="${chamIconSize}" title="${player.championName}"
+            src="${champIconLink}${player.championName}.png">
+            </div>
+            <p class="summonerName">${player.summonerName}</p>
+            <section class="items">
+                ${items}
+            </section>
+            <p class="stats centerContent textSize1_5">${player.kills}/<span>${player.deaths}</span>/${player.assists}</p>
+            <p class="minionsKilled centerContent">${ player.totalMinionsKilled + player.neutralMinionsKilled }</p>
+            <p class="goldEarned centerContent textSize1_5">${player.goldEarned.toString().slice(0, -3)},${player.goldEarned.toString().slice(-3)}</p>
+        </section>`
+    }
+    
+    /////// Champions
     let champIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/champion/";
     let chamIconSize = 50;
     //Items
@@ -50,43 +92,7 @@
                 
                 <section class="wrapPlayerRow">
                 <% for (let player of winners) {%>
-                    <section class="playerRows">
-                        <section class="summs">
-                            <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
-                        src="<%= summsIconLink %><%= summs[player.summoner1Id]%>">
-                            <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
-                        src="<%= summsIconLink %><%= summs[player.summoner2Id]%>">
-                        </section>
-                        <section class="runes">
-                            <img width="<%= runesIconSize %>" height="<%= runesIconSize %>"
-                        src="<%= runesIconLink %><%= runes[player.perks.styles[0].selections[0].perk] %>">
-                            <img width="<%= runesIconSize-8 %>" height="<%= runesIconSize-8 %>"
-                        src="<%= runesIconLink %><%= runes[player.perks.styles[1].style] %>">
-                        </section>
-                        
-                        <p class="championLevel centerContent textSize1_5"><%= player.champLevel %></p>
-                        <div class="containChampionIcon" style="width: <%= chamIconSize %>px; height: <%= chamIconSize %>px;">
-                        <img width="<%= chamIconSize %>" height="<%= chamIconSize %>" title="<%= player.championName %>"
-                        src="<%= champIconLink %><%= player.championName %>.png">
-                        </div>
-                        <p class="summonerName"><%= player.summonerName %></p>
-                        <section class="items">
-                            <% for (let i=0; i<7; i++){%>
-                                <% if (player["item"+i] != 0) {%>
-                                <img width="<%= itemIconSize %>" height="<%= itemIconSize %>"
-                            src="<%= itemIconLink %><%= player["item"+i] %>.png">
-                               <%}else{%>
-                                <div class="emptyItem" style="width: <%= itemIconSize %>px; height: <%= itemIconSize %>px;"></div>
-                                <%}%>
-                            <%}%>
-                        </section>
-                        <p class="stats centerContent textSize1_5"><%= player.kills %>/<span><%= player.deaths %></span>/<%= player.assists %></p>
-                        <% let cs = player.totalMinionsKilled + player.neutralMinionsKilled %>
-                        <p class="minionsKilled centerContent"><%= cs %></p>
-                        <% let goldEarnedBC = player.goldEarned.toString().slice(-3)
-                        let goldEarnedAC = player.goldEarned.toString().slice(0, -3)%>
-                        <p class="goldEarned centerContent textSize1_5"><%= goldEarnedAC %>,<%= goldEarnedBC %></p>
-                    </section>
+                   <%- playerRowsTemplate(player)%>
                 <%}%>
                 </section>
                 
@@ -96,43 +102,7 @@
 
                 <section class="wrapPlayerRow">
                 <% for (let player of losers) {%>
-                    <section class="playerRows">
-                        <section class="summs">
-                            <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
-                        src="<%= summsIconLink %><%= summs[player.summoner1Id]%>">
-                            <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
-                        src="<%= summsIconLink %><%= summs[player.summoner2Id]%>">
-                        </section>
-                        <section class="runes">
-                            <img width="<%= runesIconSize %>" height="<%= runesIconSize %>"
-                        src="<%= runesIconLink %><%= runes[player.perks.styles[0].selections[0].perk] %>">
-                            <img width="<%= runesIconSize-8 %>" height="<%= runesIconSize-8 %>"
-                        src="<%= runesIconLink %><%= runes[player.perks.styles[1].style] %>">
-                        </section>
-
-                        <p class="championLevel centerContent textSize1_5"><%= player.champLevel %></p>
-                        <div class="containChampionIcon" style="width: <%= chamIconSize %>px; height: <%= chamIconSize %>px;">
-                        <img width="<%= chamIconSize %>" height="<%= chamIconSize %>" title="<%= player.championName %>"
-                        src="<%= champIconLink %><%= player.championName %>.png">
-                        </div>
-                        <p class="summonerName"><%= player.summonerName %></p>
-                        <section class="items">
-                            <% for (let i=0; i<7; i++){%>
-                                <% if (player["item"+i] != 0) {%>
-                                <img width="<%= itemIconSize %>" height="<%= itemIconSize %>"
-                        src="<%= itemIconLink %><%= player["item"+i] %>.png">
-                                <%}else{%>
-                                <div class="emptyItem" style="width: <%= itemIconSize %>px; height: <%= itemIconSize %>px;"></div>
-                                <%}%>
-                            <%}%>
-                        </section>
-                        <p class="stats centerContent textSize1_5"><%= player.kills %>/<span><%= player.deaths %></span>/<%= player.assists %></p>
-                        <% let cs = player.totalMinionsKilled + player.neutralMinionsKilled %>
-                        <p class="minionsKilled centerContent"><%= cs %></p>
-                        <% let goldEarnedBC = player.goldEarned.toString().slice(-3)
-                        let goldEarnedAC = player.goldEarned.toString().slice(0, -3)%>
-                        <p class="goldEarned centerContent textSize1_5"><%= goldEarnedAC %>,<%= goldEarnedBC %></p>
-                    </section>
+                   <%- playerRowsTemplate(player) %> 
                 <%}%>
                 </section>
             </section>
