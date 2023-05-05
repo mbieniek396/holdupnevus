@@ -94,19 +94,3 @@
 .wrapPlayerRow{
     display: grid;
 }
-
-.TOP{
-    order: -4;
-}
-
-.JUNGLE{
-    order: -3;
-}
-
-.MIDDLE{
-    order: -2;
-}
-
-.BOTTOM{
-    order: -1;
-}

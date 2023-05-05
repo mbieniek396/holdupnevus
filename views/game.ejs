@@ -50,7 +50,7 @@
                 
                 <section class="wrapPlayerRow">
                 <% for (let player of winners) {%>
-                    <section class="playerRows <%= player.teamPosition %>">
+                    <section class="playerRows">
                         <section class="summs">
                             <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
                         src="<%= summsIconLink %><%= summs[player.summoner1Id]%>">
@@ -96,7 +96,7 @@
 
                 <section class="wrapPlayerRow">
                 <% for (let player of losers) {%>
-                    <section class="playerRows <%= player.teamPosition %>">
+                    <section class="playerRows">
                         <section class="summs">
                             <img width="<%= summsIconSize %>" height="<%= summsIconSize %>"
                         src="<%= summsIconLink %><%= summs[player.summoner1Id]%>">

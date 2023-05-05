@@ -14,7 +14,6 @@ const app = express()
 
 
 
-
 /////////////////////////////////////////////////////////
 ///////////// REFRESH SETTINGS //////////////////////////
 /////////////////////////////////////////////////////////
@@ -42,6 +41,7 @@ let team = [
     "2TwgZZqQpOJOmFKk-sB4g9T4vFvOvGaxCvsqQ85E_JAWCUTMIfSzeey1ssQTo4FS8WXrnV_eC4tUHQ",//KAJXXX
     "PLouDnGvVAfpbh0ncXftLWwUEZOK0Rtszms6MZ2Pu5FHhWdOTYpvjRbEqixx-SV8L3ChEbMwaVSMIg"//Mninja57
 ];
+let roleOrder = {"TOP": 1, "JUNGLE":2, "MIDDLE":3, "BOTTOM":4, "SUPPORT":5};
 
 async function loadRunesObject(){
     response = await fetch(`http://ddragon.leagueoflegends.com/cdn/12.16.1/data/en_US/runesReforged.json`);
@@ -110,7 +110,7 @@ async function refreshMatchesData(){
         await new Promise(res => setTimeout(res, 1000)); //Await for 1 sec cause of 20calls per sec limit
         await new Promise( (resolve) => {
             Array.from(matches).forEach( async match => {
-                if (!matchNameList.includes(match)){
+                if (!matchNameList.includes(match.metadata.matchId)){
                     response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${riotKey}`);
                     if (response.status != 200){
                         console.error("Could not load data from game "+match);
@@ -120,6 +120,17 @@ async function refreshMatchesData(){
                     response = await response.json();
                     let players = response.metadata.participants
                     let goodMatch = true;
+
+                    /// Fix UTILITY to SUPPORT
+                    for(let pi of response.info.participants){
+                        if (pi.teamPosition == "UTILITY"){
+                            pi.teamPosition = "SUPPORT";
+                        }
+                    }
+
+                    /// Sort participants
+                    response.info.participants = _.sortBy(response.info.participants, 
+                        (info) => roleOrder[info.teamPosition])
 
                     if (response.info.gameDuration < 600){
                         goodMatch = false;
@@ -135,7 +146,6 @@ async function refreshMatchesData(){
 
                     if(goodMatch){
                         tempData.push(response)
-                        matchNameList.push(response.metadata.matchId);
                     }
                    
                 }
@@ -154,6 +164,9 @@ async function refreshMatchesData(){
             tempData.push(el)
         }
         matchesData = tempData;
+        for (let match of matchesData){
+            matchNameList.push(match.metadata.matchId);
+        }
         console.log(`Data succesfully refreshed! Added ${count} records!`)
         
     }else{
@@ -199,6 +212,17 @@ async function initMatchesData(){
                 let players = response.metadata.participants
                 let goodMatch = true;
 
+                /// Fix UTILITY to SUPPORT
+                for(let pi of response.info.participants){
+                    if (pi.teamPosition == "UTILITY"){
+                        pi.teamPosition = "SUPPORT";
+                    }
+                }
+
+                /// Sort participants
+                response.info.participants = _.sortBy(response.info.participants, 
+                    (info) => roleOrder[info.teamPosition])
+
                 if (response.info.gameDuration < 600){
                     goodMatch = false;
                 }else{
@@ -213,7 +237,6 @@ async function initMatchesData(){
                 
 
                 if (goodMatch){ 
-                    matchNameList.push(response.metadata.matchId);
                     if (tempData.push(response) === 20){
                         resolve();
                     }
@@ -230,6 +253,9 @@ async function initMatchesData(){
     }
     /////// Sort by the newest game
     matchesData = _.sortBy(tempData, (match) => match.info.gameStartTimestamp).reverse();
+    for (let match of matchesData){
+        matchNameList.push(match.metadata.matchId);
+    }
     console.log("Data succesfully initialized!")
 }
 
@@ -307,8 +333,8 @@ app.get('/games', async (req, res) => {
 
 app.get("/game/:id", (req,res) =>{
 
-
-    res.render('game', {"match": matchesData[req.params.id], "summs" : summs, "runes": runes});
+    let index = matchNameList.indexOf(req.params.id);
+    res.render('game', {"match": matchesData[index], "summs" : summs, "runes": runes});
 
    
 });

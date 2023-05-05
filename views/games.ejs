@@ -11,7 +11,7 @@
 </head>
 <body>
     <% matches.forEach( match => { %>
-        <% let index = matches.indexOf(match);
+        <%
         let losers = [] 
         let winners = []
         match.info.participants.forEach( info => {
@@ -24,12 +24,11 @@
 
         
         <section class="wrapMatch">
-        <a href="/game/<%= index %>">
+        <a href="/game/<%= match.metadata.matchId %>">
             <section class="winnersWrap">
                 <% winners.forEach( info => {%>
                     <section>
-                        <% let role = info.individualPosition;
-                        if (info.teamPosition === "UTILITY") { role="SUPPORT"} %>
+                        <% let role = info.teamPosition; %>
                         <img src="/img/roles/<%= role %>.png" width="50" height="50">
                         <p><%= info.summonerName %></p>
                     </section>
@@ -38,8 +37,7 @@
             <section class="losersWrap">
                 <% losers.forEach( info => {%>
                     <section>
-                        <% let role = info.teamPosition;
-                        if (info.teamPosition === "UTILITY") { role="SUPPORT"} %>
+                        <% let role = info.teamPosition; %>
                         <img src="/img/roles/<%= role %>.png" width="50" height="50">
                         <p><%= info.summonerName %></p>
                     </section>
