@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/fun.css">
 </head>
 <body>
 
@@ -35,7 +34,6 @@
         <img class="mainTitleBG" src="/img/webPhotos/teamfoto.avif" width="500" height="500">
     </section>
     <main>
-
 
         <section class="aboutUs" id="aboutUs">
             <section class="aboutUsItem">
@@ -74,15 +72,15 @@
                 <aside>
                     <div class="item">
                         <label for="who">From</label>
-                        <input class="contactUsInput" type="text" id="who">
+                        <input type="text" id="who">
                     </div>
                     <div class="item">
                         <label for="mail">Email adress</label>
-                        <input class="contactUsInput" type="text" id="mail">
+                        <input type="text" id="mail">
                     </div>
                     <div class="item">
                         <label for="message">Message</label>
-                        <textarea class="contactUsInput" id="message" rows="7" cols="30"></textarea>
+                        <textarea id="message" rows="7" cols="30"></textarea>
                     </div>
                     <button id="submit">SEND</button>
                 </aside>
@@ -105,30 +103,44 @@
         let mail = document.getElementById("mail");
         let msg = document.getElementById("message");
 
-        btn.addEventListener('click', () => {
+        who.addEventListener('input', () =>{
+            if (who.value == ""){
+                who.setAttribute('class', "");
+            }else{
+                who.setAttribute('class', "inputInUse");
+            }
+        })
 
-            // TODO: weryfikacja danych :D
+        mail.addEventListener('input', () =>{
+            if (mail.value == ""){
+                mail.setAttribute('class', "");
+            }else{
+                mail.setAttribute('class', "inputInUse");
+            }
+        })
 
-            btn.textContent = "Sending..."
+        msg.addEventListener('input', () =>{
+            if (msg.value == ""){
+                msg.setAttribute('class', "");
+            }else{
+                msg.setAttribute('class', "inputInUse");
+            }
+        })
 
+        btn.addEventListener('click', (event) => {
             /// Check if values are not empty
             if (!who.value){
-                // who.classList.add("wrongInput");
-                btn.textContent = "SEND"
                 return;
             }
             if (!mail.value){
-                btn.textContent = "SEND"
                 return;
             }
             if (!msg.value){
-                btn.textContent = "SEND"
                 return;
             }
 
             // Check if email has @ in it
             if (!mail["value"].includes("@")){
-                btn.textContent = "SEND"
                 return;
             }
 
@@ -149,7 +161,6 @@
                 who.value = "";
                 mail.value = "";
                 msg.value = "";
-                btn.textContent = "SEND"
             })
         })
 

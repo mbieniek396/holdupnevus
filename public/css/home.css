@@ -6,18 +6,14 @@
     box-sizing: border-box;
 }
 
-:root{
-    --bg-color: blanchedalmond; 
-}
-
 html{
     scroll-behavior: smooth;
 }
 
 body{
     
-    background-color: var(--bg-color);
-    
+    background-color: var(--primary-color);
+    font-family: Righteous,Arial,sans-serif;
     
 }
 
@@ -32,6 +28,7 @@ h1{
     font-size: 3rem;
 }
 
+
 .main{
     position: relative;
     overflow: hidden;
@@ -39,9 +36,8 @@ h1{
 }
 
 
-
 .mainTitle{
-    font-size: 8rem;
+    font-size: 7rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -58,22 +54,25 @@ h1{
 }
 
 .aboutUs{
-    margin-top: 3rem;
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
 }
 
 .aboutUsItem{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap:4rem;
-    width: 80%;
-    padding: 2rem;
+    gap:20%;
+    padding: 2rem 0;
 }
 
 .aboutUsItem article{
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .aboutUsItem h2{
@@ -81,7 +80,7 @@ h1{
 }
 
 .aboutUsItem p{
-    max-width: 50ch;
+    max-width: 70ch;
 }
 
 .contactUs{
@@ -89,6 +88,7 @@ h1{
     flex-direction: row;
     justify-content: space-around;
     width: 80%;
+    gap:10%;
 }
 
 .contactUs aside{
@@ -100,7 +100,7 @@ h1{
     box-shadow: 0 0 5px black;
     padding: 2rem 1.5rem;
     border-radius: 2px;
-    width: 35%;
+    flex: 1;
 }
 
 .contactUs aside .item{
@@ -109,44 +109,66 @@ h1{
     width: 90%;
 }
 
-.contactUs aside input, .contactUs aside textarea{
+.contactUs input, .contactUs aside textarea{
     padding: 0.3rem;
     border: none;
     border-bottom: 2px solid var(--secondary-color);
     background-color: inherit;
     border-radius: 2px;
+    -webkit-text-fill-color: var(--accent-color); /* autocomplete coloring */
+    color: var(--accent-color);
+    font-family: Righteous,Arial,sans-serif;
 }
 
-::placeholder{
-    color: var(--secondary-color);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+aside .inputInUse, .contactUs input:focus, .contactUs textarea:focus{
+    outline: 2px solid var(--secondary-color);
+    outline-offset: -1px;
+    border-radius: 2px;
+}
+
+aside .wrongInput{
+    outline: 2px solid red;
 }
 
 .contactUs article{
+    flex: 2;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.contactUs article p{
-    max-width: 80ch;
+
+.aboutUs h2, .contactUs h1{
+    color: var(--accent-color);
 }
 
 #submit{
     padding: 0.5rem 2.4rem;
     border-radius: 2px;
     border: none;
-    background-color: var(--secondary-color);
-    color: var(--accent-color);
-    transition: all .3s;
-}
-
-#submit:hover, #submit:focus{
     background-color: var(--accent-color);
     color: var(--secondary-color);
     transition: all .3s;
+    font-family: Righteous,Arial,sans-serif;
+}
+
+#submit:hover{
+    outline: 2px solid var(--accent-color);
+    outline-offset: -4px;
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    transition: background-color .5s, color .5s;
     cursor: pointer;
+}
+
+#submit:active{
+    outline: none;
+}
+
+::placeholder{
+    color: var(--secondary-color);
+    font-family: Righteous,Arial,sans-serif;
 }
 
 .hide{

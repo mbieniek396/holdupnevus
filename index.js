@@ -322,6 +322,13 @@ app.get('/', async (req, res) => {
     res.render('home');
 });
 
+//// Druga wersja contact Us
+app.get('/v2', async (req, res) => {
+    res.render('homev2');
+});
+
+
+
 app.get('/games', async (req, res) => {
 
     refreshMatchesData();

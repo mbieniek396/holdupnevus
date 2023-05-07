@@ -3,7 +3,6 @@ nav{
     top:0;
     left:0;
     min-height: 4rem;
-    background-color: var(--secondary-color);
     z-index: 10;
     width: 100%;
     color: var(--accent-color);
@@ -29,4 +28,13 @@ nav .links a, nav .links a:active, nav .links a:visited{
 nav .links a:hover, nav .links a:focus{
     font-size: 1.2rem;
     filter: brightness(1.2);
+}
+
+nav .navLogo{
+    display: flex;
+    align-items: center;
+}
+
+.navBG{
+    background-color: var(--secondary-color);
 }
