@@ -285,7 +285,7 @@ async function sendMail(who, mail, message){
 
             const info = await transporter.sendMail({
                 from: "Mati Vloger <mativlogerbusiness@gmail.com>",
-                to: 'mbieniek396@gmail.com',
+                to: 'holdupnevus@gmail.com',
                 subject: `You've got a new message from ${who}`,
                 html: content
             })
