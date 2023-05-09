@@ -302,6 +302,8 @@ async function sendMail(who, mail, message){
 
 
 app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+
 
 /// Middleware
 app.use(express.static(path.join(__dirname, 'public')));
