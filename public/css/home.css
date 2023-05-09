@@ -84,6 +84,7 @@ h1{
 }
 
 .contactUs{
+    padding-top: 12%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
