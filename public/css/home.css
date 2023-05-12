@@ -84,7 +84,7 @@ h1{
 }
 
 .contactUs{
-    padding-top: 12%;
+    padding-top: 11%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -119,6 +119,7 @@ h1{
     -webkit-text-fill-color: var(--accent-color); /* autocomplete coloring */
     color: var(--accent-color);
     font-family: Righteous,Arial,sans-serif;
+    font-size: 1rem;
 }
 
 aside .inputInUse, .contactUs input:focus, .contactUs textarea:focus{
@@ -136,7 +137,7 @@ aside .wrongInput{
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 

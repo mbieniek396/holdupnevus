@@ -264,12 +264,24 @@ async function initMatchesData(){
 /////////////////////////////////////////////////////////
 async function sendMail(who, mail, message){
     return new Promise(async (resolve, reject) => {
-
         let content = 
-        `<h1> Message from ${who}</h1>
-        <h2> Email for response: ${mail}</h2>
-        <h4> Message:</h4>
-        <p>${message}</p>
+        `<!DOCTYPE html>
+        <html>
+        <body style="margin:0;padding:0;">
+            <h1 style="text-align: center;font-family: cursive;margin: 0;color: #000;background: #FFF;width: 100%;padding: 2rem 0;"> 
+            You've go a new message!</h1>
+            <h2 style="text-align: center;font-family: cursive;margin: 0;color: #FFF;background: #000;width: 100%;padding: 0.5rem 0;">
+            From <span style="color: #F0592A">${who}<span></h2>
+            <h2 style="text-align: center;font-family: cursive;margin: 0;color: #FFF;background: #000;width: 100%;padding: 0.5rem 0;">
+            Email for response: <span style="color: #F0592A">${mail}<span></h2>
+            <h4 style="text-align: center;font-family: cursive;margin: 0;color: #FFF;background: #F0592A;width: 100%;padding: 0.5rem 0;">
+            Message:</h4>
+            <div style="margin: 0;background: #FFF;
+            border: 2px solid #F0592A;
+            "><pre style="margin: auto;padding: 0.5rem;;max-width: 30ch;background: #dedede;color: #000;font-family: cursive;
+            ">${message}</pre></div>
+        </body>
+        </html>        
         `
 
         let config = {
@@ -324,12 +336,6 @@ app.get('/', async (req, res) => {
     res.render('home');
 });
 
-//// Druga wersja contact Us
-app.get('/v2', async (req, res) => {
-    res.render('homev2');
-});
-
-
 
 app.get('/games', async (req, res) => {
 
@@ -354,6 +360,10 @@ app.post('/sendContactMessage', (req, res) =>{
     sendMail(data.who, data.mail, data.message)
     .then(() => {
         res.status(200).send();
+    })
+    .catch( () => {
+        res.status(500).send();
+        console.log("Messange was not send, bacause of internal error")
     });
 })
 

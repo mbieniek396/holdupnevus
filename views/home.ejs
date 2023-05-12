@@ -130,8 +130,9 @@
                 btn.textContent = "SEND"
                 return;
             }
+            
 
-            fetch('https://holdupnevus.vercel.app/sendContactMessage', {
+            fetch('http://localhost:8003/sendContactMessage', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
