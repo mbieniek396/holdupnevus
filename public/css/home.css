@@ -28,6 +28,15 @@ h1{
     font-size: 3rem;
 }
 
+footer{
+    background-color: var(--secondary-color);
+    margin-top: 5rem;
+    color: var(--primary-color);
+    display: grid;
+    place-content: center;
+    min-height: 100px;
+}
+
 
 .main{
     position: relative;
@@ -51,6 +60,8 @@ h1{
     height: 100%;
     filter: brightness(0.3) blur(2px);
     transform: scale(1.05);
+    object-fit: cover;
+    object-position: top;
 }
 
 .aboutUs{
@@ -179,9 +190,6 @@ aside .wrongInput{
 
 
 /* ONLY TO DEVELOPMENT HELP*/
-footer{
-    height: 200px;
-}
 
 .div{
     height: 1000px;
