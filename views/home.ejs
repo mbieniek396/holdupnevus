@@ -74,16 +74,17 @@
                 <aside>
                     <div class="item">
                         <label for="who">From</label>
-                        <input class="contactUsInput" type="text" id="who">
+                        <input class="contactUsInput notEmptyInput" type="text" id="who">
                     </div>
                     <div class="item">
                         <label for="mail">Email adress</label>
-                        <input class="contactUsInput" type="text" id="mail">
+                        <input class="contactUsInput notEmptyInput" type="text" id="mail">
                     </div>
                     <div class="item">
                         <label for="message">Message</label>
-                        <textarea class="contactUsInput" id="message" rows="7" cols="30"></textarea>
+                        <textarea class="contactUsInput notEmptyInput" id="message" rows="7" cols="30"></textarea>
                     </div>
+                    <p class="contactErrorMessage"></p>
                     <button id="submit">SEND</button>
                 </aside>
 
@@ -105,34 +106,55 @@
         let who = document.getElementById("who");
         let mail = document.getElementById("mail");
         let msg = document.getElementById("message");
+        let errMsg = document.querySelector(".contactErrorMessage");
+        let NEInputs = document.querySelectorAll(".notEmptyInput")
+        let emailErrMsg = "Make sure your mail includes @, and a domain! Like @gmail.com";
+
+        NEInputs.forEach( (inp) => {
+            inp.addEventListener('keypress', (event) => {
+                if (event.srcElement.value+event.key){
+                    if (event.srcElement?.id == "mail" && 
+                    (!event.srcElement["value"].includes("@") || !event.srcElement["value"].includes("."))){
+                        errMsg.textContent = emailErrMsg;
+                        return;
+                    }
+                    event.srcElement.classList.remove('wrongInput');
+                    errMsg.textContent = "";
+                } 
+            });
+        });
 
         btn.addEventListener('click', () => {
 
             // TODO: weryfikacja danych :D
 
-            btn.textContent = "Sending..."
+            
 
             /// Check if values are not empty
             if (!who.value){
-                // who.classList.add("wrongInput");
-                btn.textContent = "SEND"
+                who.classList.add("wrongInput");
+                errMsg.textContent = "Please fill the From input field";
                 return;
             }
             if (!mail.value){
-                btn.textContent = "SEND"
+                mail.classList.add("wrongInput");
+                errMsg.textContent = "Please fill the Email adress";
                 return;
             }
             if (!msg.value){
-                btn.textContent = "SEND"
+                msg.classList.add("wrongInput");
+                errMsg.textContent = "You can't send an empty message!";
                 return;
             }
 
             // Check if email has @ in it
-            if (!mail["value"].includes("@")){
-                btn.textContent = "SEND"
+            if (!mail["value"].includes("@") || !mail["value"].includes(".")){
+                mail.classList.add("wrongInput");
+                errMsg.textContent = emailErrMsg;
                 return;
             }
             
+            btn.textContent = "Sending..."
 
             fetch('http://localhost:8003/sendContactMessage', {
                 method: 'POST',
