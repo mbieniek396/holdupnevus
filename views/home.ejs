@@ -196,9 +196,11 @@
                 nav.classList.add('navBG');
                 navBG=true;
             }
-            if (navBG && window.scrollY < size && !menuIsOpen){
-                nav.classList.remove('navBG');
+            if (navBG && window.scrollY < size){
                 navBG = false;
+                if (!menuIsOpen){
+                    nav.classList.remove('navBG');
+                }
             }
         }
         showScroll()
