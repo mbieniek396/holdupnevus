@@ -257,9 +257,13 @@ aside .wrongInput{
     }
 
     .contactUs article{
-        text-align: center;
+        text-align: justify;
         gap: .5rem;
     }
+
+    .contactUs article h1{
+        text-align: center;
+    };
 
 }
 
@@ -268,6 +272,10 @@ aside .wrongInput{
 
     .mainTitle{
         font-size: 4rem;
+    }
+
+    .aboutUs{
+        padding: 4rem 1rem;
     }
 
     .aboutUsItem p{
@@ -290,14 +298,32 @@ aside .wrongInput{
         font-size: 2.7rem;
     }
 
+    .aboutUs{
+        padding: 2rem 1rem;
+    }
+
+    .aboutUsItem h2{
+        font-size: 2.5rem;
+    }
+
+
     .aboutUsItem p{
         max-width: 30ch;
+        font-size: 1rem;
     }
 
     .aboutUsItem img{
-        width: 200px;
-        height: 200px;
+        width: 170px;
+        height: 170px;
     }
+
+    .contactUs article p{
+        font-size: 1rem;
+    }
+
+    .contactUs article h1{
+        font-size: 2.5rem;
+    };
 
     
 }
