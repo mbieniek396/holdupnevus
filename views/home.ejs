@@ -18,8 +18,12 @@
             width="60" height="60">
             <h2>Holdup Nevus</h2>
         </section>
-        
-        <section class="links">
+        <div class="menuIcon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <section class="hide links">
             <a href="#main">Home</a>
             <a href="#aboutUs">About us</a>
             <a href="#">Members</a>
@@ -182,6 +186,7 @@
         /////////// Add bg to nav after scrolling out of main///
         //////////////////////////////////////////////////////////
         let navBG = false;
+        let menuIsOpen = false;
         let nav = document.querySelector('nav')
 
         const showScroll = function(){
@@ -191,7 +196,7 @@
                 nav.classList.add('navBG');
                 navBG=true;
             }
-            if (navBG && window.scrollY < size){
+            if (navBG && window.scrollY < size && !menuIsOpen){
                 nav.classList.remove('navBG');
                 navBG = false;
             }
@@ -199,6 +204,28 @@
         showScroll()
         window.addEventListener('scroll', showScroll)
         window.addEventListener('resize', showScroll)
+        window.addEventListener('resize', () => {
+            if (!menuIsOpen){
+                if (window.innerWidth <= 850){
+                    linksMenu.classList.add('hide');
+                }else{
+                    linksMenu.classList.remove('hide');
+                }
+                
+            }
+        });
+
+
+        let openMenu = document.querySelector(".menuIcon");
+        let linksMenu = document.querySelector(".links");
+
+        openMenu.addEventListener('click', () => {
+            linksMenu.classList.toggle('hide');
+            menuIsOpen = menuIsOpen ? false : true;
+            if (!navBG){
+                nav.classList.toggle('navBG');
+            }
+        });
     </script>
 </body>
 </html>

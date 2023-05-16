@@ -38,3 +38,62 @@ nav .navLogo{
 .navBG{
     background-color: var(--secondary-color);
 }
+
+nav .menuIcon div{
+    display: none;
+    width: 30px;
+    height: 5px;
+    margin: 5px;
+    background-color: var(--accent-color);
+}
+
+nav .menuIcon:hover{
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 850px){
+
+    nav .menuIcon div{
+        display: block;
+    }
+
+    body nav .links{
+        border-top: 2px solid var(--accent-color);
+        flex-direction: column;
+        position: fixed;
+        top:76px;
+        left:0;
+        background: var(--secondary-color);
+        width: 100%;
+        gap:0;
+    }
+
+    nav .links a, nav .links a:active, nav .links a:visited{
+        width: 100%;
+        padding: .5rem 0;
+        text-align: center;
+    }
+
+
+    body nav .links a:hover, body nav .links a:focus{
+        font-size: 1rem;
+        color: var(--secondary-color);
+        background: var(--accent-color);
+    }
+}
+
+@media screen and (max-width: 440px){
+    nav .navLogo img{
+        width: 40px;
+        height: 40px;
+    }
+
+    nav .navLogo h2{
+        font-size: 1.5rem;
+    }
+
+    body nav .links{
+        top:64px;
+    }
+}
