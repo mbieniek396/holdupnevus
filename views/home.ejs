@@ -187,7 +187,9 @@
         //////////////////////////////////////////////////////////
         let navBG = false;
         let menuIsOpen = false;
-        let nav = document.querySelector('nav')
+        let nav = document.querySelector('nav');
+        let openMenu = document.querySelector(".menuIcon");
+        let linksMenu = document.querySelector(".links");
 
         const showScroll = function(){
             let size = window.innerHeight * 0.85
@@ -204,25 +206,25 @@
             }
         }
         showScroll()
-        window.addEventListener('scroll', showScroll)
-        window.addEventListener('resize', showScroll)
-        window.addEventListener('resize', () => {
+
+        const fixLinks = function(){
             if (!menuIsOpen){
                 if (window.innerWidth <= 850){
                     linksMenu.classList.add('hide');
                 }else{
                     linksMenu.classList.remove('hide');
                 }
-                
             }
-        });
+        }
+        fixLinks();
 
-
-        let openMenu = document.querySelector(".menuIcon");
-        let linksMenu = document.querySelector(".links");
+        window.addEventListener('scroll', showScroll)
+        window.addEventListener('resize', showScroll)
+        window.addEventListener('resize', fixLinks);
 
         openMenu.addEventListener('click', () => {
             linksMenu.classList.toggle('hide');
+            openMenu.classList.toggle('openedMenuIcon')
             menuIsOpen = menuIsOpen ? false : true;
             if (!navBG){
                 nav.classList.toggle('navBG');

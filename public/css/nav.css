@@ -45,11 +45,30 @@ nav .menuIcon div{
     height: 5px;
     margin: 5px;
     background-color: var(--accent-color);
+    transition: 0.5s ease-in;
 }
 
 nav .menuIcon:hover{
     cursor: pointer;
 }
+
+body nav .openedMenuIcon div{
+    transform: rotate(-360deg);
+    opacity: 0;
+    transition: 0.3s ease-in;
+}
+
+body nav .openedMenuIcon div:first-child{
+    opacity: 1;
+    transform: rotate(495deg) translateY(-14px);
+    
+} 
+
+body nav .openedMenuIcon div:last-child{
+    opacity: 1;
+    transform: rotate(-495deg) translateY(14px);
+    
+} 
 
 
 @media screen and (max-width: 850px){
