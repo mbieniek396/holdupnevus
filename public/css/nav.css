@@ -1,5 +1,6 @@
 nav{
     position: fixed;
+    overflow: hidden;
     top:0;
     left:0;
     min-height: 4rem;
@@ -16,6 +17,7 @@ nav .links{
     display:flex;
     align-items: center;
     gap:2rem;
+    transition: all 1s;
 }
 
 nav .links a, nav .links a:active, nav .links a:visited{
@@ -31,12 +33,19 @@ nav .links a:hover, nav .links a:focus{
 }
 
 nav .navLogo{
+    filter: blur(0);
     display: flex;
     align-items: center;
+    transform: translateX(0);
+    transition: all 1s;
 }
 
 .navBG{
     background-color: var(--secondary-color);
+}
+
+nav .menuIcon{
+    transition: all 1s;
 }
 
 nav .menuIcon div{
@@ -69,6 +78,16 @@ body nav .openedMenuIcon div:last-child{
     transform: rotate(-495deg) translateY(14px);
     
 } 
+
+nav .fadeLogo{
+    transform: translateX(-300px);
+    filter: blur(10px);
+}
+
+nav .fadeLinks{
+    transform: translateX(500px);
+    filter: blur(10px);
+}
 
 
 @media screen and (max-width: 850px){

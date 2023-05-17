@@ -9,21 +9,23 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/fun.css">
+
+    <script src="/js/nav.js" defer></script>
 </head>
 <body>
 
     <nav>
-        <section class="navLogo">
+        <section class="navLogo fadeLogo">
             <img src="/img/webPhotos/logo.png" alt="" title=""
             width="60" height="60">
             <h2>Holdup Nevus</h2>
         </section>
-        <div class="menuIcon">
+        <div class="menuIcon fadeLinks">
             <div></div>
             <div></div>
             <div></div>
         </div>
-        <section class="hide links">
+        <section class="hide links fadeLinks">
             <a href="#main">Home</a>
             <a href="#aboutUs">About us</a>
             <a href="#">Members</a>
@@ -34,8 +36,9 @@
 
     
     <section class="main" id="main">
-        <h1 class="mainTitle">Holdup Nevus</h1>
+        <h1 class="mainTitle hideFadeIn hide">Holdup Nevus</h1>
         <!--<img class="mainTitle" src="/img/webPhotos/fullLogo.png" width="700" height="700">-->
+        <div class="hideDarkIn showDarkIn"></div>
         <img class="mainTitleBG" src="/img/webPhotos/teamfoto.avif" width="500" height="500">
     </section>
     <main>
@@ -43,25 +46,25 @@
 
         <section class="aboutUs" id="aboutUs">
             <section class="aboutUsItem">
-                <img src="/img/webPhotos/groupIcon.png" width="300" height="300">
-                <article>
+                <img class="hideFromRight" src="/img/webPhotos/groupIcon.png" width="300" height="300">
+                <article class="hideFromRight">
                     <h2>Who we are</h2>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                 </article>
                 
             </section>
             <section class="aboutUsItem">
-                <article>
+                <article class="hideFromLeft">
                     <h2>What we do</h2>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                 </article>
-                <img src="/img/webPhotos/whatWeDo.png" width="300" height="300">
+                <img class="hideFromLeft" src="/img/webPhotos/whatWeDo.png" width="300" height="300">
             </section>
             <section class="aboutUsItem">
-                <img src="/img/webPhotos/groupIcon.png" width="300" height="300">
+                <img class="hideFromRight" src="/img/webPhotos/groupIcon.png" width="300" height="300">
                 <article>
-                    <h2>Members</h2>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                    <h2 class="hideFromRight">Members</h2>
+                    <p class="hideFromRight">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                 </article>
             </section>
         </section>
@@ -70,12 +73,12 @@
         </div>
 
         <section class="contactUs" id="contactUs">
-                <article>
+                <article class="hideFromRight">
                     <h1>Contact us!</h1>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                 </article>
                 
-                <aside>
+                <aside class="hideFromLeft">
                     <div class="item">
                         <label for="who">From</label>
                         <input class="contactUsInput notEmptyInput" type="text" id="who">
@@ -102,134 +105,7 @@
     </footer>
 
     
-    <script>
-        /////////////////////////////////////////////////////////
-        /////////// Contact Us sending message ///////////////////
-        //////////////////////////////////////////////////////////
-        let btn = document.getElementById("submit");
-        let who = document.getElementById("who");
-        let mail = document.getElementById("mail");
-        let msg = document.getElementById("message");
-        let errMsg = document.querySelector(".contactErrorMessage");
-        let NEInputs = document.querySelectorAll(".notEmptyInput")
-        let emailErrMsg = "Make sure your mail includes @, and a domain! Like @gmail.com";
-
-        NEInputs.forEach( (inp) => {
-            inp.addEventListener('keypress', (event) => {
-                if (event.srcElement.value+event.key){
-                    if (event.srcElement?.id == "mail" && 
-                    (!event.srcElement["value"].includes("@") || !event.srcElement["value"].includes("."))){
-                        errMsg.textContent = emailErrMsg;
-                        return;
-                    }
-                    event.srcElement.classList.remove('wrongInput');
-                    errMsg.textContent = "";
-                } 
-            });
-        });
-
-        btn.addEventListener('click', () => {
-
-            // TODO: weryfikacja danych :D
-
-            
-
-            /// Check if values are not empty
-            if (!who.value){
-                who.classList.add("wrongInput");
-                errMsg.textContent = "Please fill the From input field";
-                return;
-            }
-            if (!mail.value){
-                mail.classList.add("wrongInput");
-                errMsg.textContent = "Please fill the Email adress";
-                return;
-            }
-            if (!msg.value){
-                msg.classList.add("wrongInput");
-                errMsg.textContent = "You can't send an empty message!";
-                return;
-            }
-
-            // Check if email has @ in it
-            if (!mail["value"].includes("@") || !mail["value"].includes(".")){
-                mail.classList.add("wrongInput");
-                errMsg.textContent = emailErrMsg;
-                return;
-            }
-            
-            btn.textContent = "Sending..."
-
-            fetch('http://localhost:8003/sendContactMessage', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ "who": who.value, "mail": mail.value, "message": msg.value})
-            })
-            .then(response => {
-                if (response.status == 200){
-                    window.alert("Message sent succesfully!")
-                }else{
-                    window.alert("Message was NOT sent!")
-                }
-                who.value = "";
-                mail.value = "";
-                msg.value = "";
-                btn.textContent = "SEND"
-            })
-        })
-
-
-        /////////////////////////////////////////////////////////
-        /////////// Add bg to nav after scrolling out of main///
-        //////////////////////////////////////////////////////////
-        let navBG = false;
-        let menuIsOpen = false;
-        let nav = document.querySelector('nav');
-        let openMenu = document.querySelector(".menuIcon");
-        let linksMenu = document.querySelector(".links");
-
-        const showScroll = function(){
-            let size = window.innerHeight * 0.85
-
-            if (!navBG && window.scrollY >= size){
-                nav.classList.add('navBG');
-                navBG=true;
-            }
-            if (navBG && window.scrollY < size){
-                navBG = false;
-                if (!menuIsOpen){
-                    nav.classList.remove('navBG');
-                }
-            }
-        }
-        showScroll()
-
-        const fixLinks = function(){
-            if (!menuIsOpen){
-                if (window.innerWidth <= 850){
-                    linksMenu.classList.add('hide');
-                }else{
-                    linksMenu.classList.remove('hide');
-                }
-            }
-        }
-        fixLinks();
-
-        window.addEventListener('scroll', showScroll)
-        window.addEventListener('resize', showScroll)
-        window.addEventListener('resize', fixLinks);
-
-        openMenu.addEventListener('click', () => {
-            linksMenu.classList.toggle('hide');
-            openMenu.classList.toggle('openedMenuIcon')
-            menuIsOpen = menuIsOpen ? false : true;
-            if (!navBG){
-                nav.classList.toggle('navBG');
-            }
-        });
+    <script src="/js/home.js">
     </script>
 </body>
 </html>

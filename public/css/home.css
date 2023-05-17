@@ -11,13 +11,13 @@ html{
 }
 
 body{
-    
     background-color: var(--primary-color);
     font-family: Righteous,Arial,sans-serif;
     
 }
 
 main{
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,7 +51,7 @@ footer{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
     color: var(--accent-color);
     z-index: 1;
 }
@@ -196,6 +196,64 @@ aside .wrongInput{
 }
 
 
+.hideDarkIn{
+    background: radial-gradient(circle,transparent, black);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+}
+
+.showDarkIn{
+    opacity: 0;
+    transition: all 2s;
+}
+
+
+.hideFadeIn{
+    opacity: 0;
+    filter: blur(20px);
+}
+
+.showFadeIn{
+    opacity: 1;
+    filter: blur(0);
+    transition: 1s all;
+}
+
+.hideFromRight{
+    transform: translateX(-200px);
+    opacity: 0;
+    filter: blur(10px);
+    transition: 0.8s all;
+} 
+
+.showFromRight{
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: 0.8s all;
+}
+
+.hideFromLeft{
+    transform: translateX(200px);
+    opacity: 0;
+    filter: blur(10px);
+    transition: 0.8s all;
+} 
+
+.showFromLeft{
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: 0.8s all;
+}
+
+
+
+
+
 /* Media QUery */
 
 @media screen and (max-width: 1250px){
@@ -326,6 +384,17 @@ aside .wrongInput{
     };
 
     
+}
+
+
+/* being nice to people */
+@media(prefers-reduced-motion){
+    .hideFromRight{
+        transition: none;
+    } 
+    .hideFromLeft{
+        transition: none;
+    } 
 }
 
 
