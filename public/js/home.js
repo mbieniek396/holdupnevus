@@ -10,7 +10,7 @@ let NEInputs = document.querySelectorAll(".notEmptyInput")
 let emailErrMsg = "Make sure your mail includes @, and a domain! Like @gmail.com";
 
 NEInputs.forEach( (inp) => {
-    inp.addEventListener('keypress', (event) => {
+    inp.addEventListener('keydown', (event) => {
         if (event.srcElement.value+event.key){
             if (event.srcElement?.id == "mail" && 
             (!event.srcElement["value"].includes("@") || !event.srcElement["value"].includes("."))){
@@ -55,7 +55,7 @@ btn.addEventListener('click', () => {
     
     btn.textContent = "Sending..."
 
-    fetch('http://localhost:8003/sendContactMessage', {
+    fetch('https://holdupnevus.vercel.app/sendContactMessage', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
