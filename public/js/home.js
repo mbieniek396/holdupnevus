@@ -6,8 +6,10 @@ let who = document.getElementById("who");
 let mail = document.getElementById("mail");
 let msg = document.getElementById("message");
 let errMsg = document.querySelector(".contactErrorMessage");
-let NEInputs = document.querySelectorAll(".notEmptyInput")
+let NEInputs = document.querySelectorAll(".notEmptyInput");
+let successMsg = document.querySelector(".contactSuccessMessage");
 let emailErrMsg = "Make sure your mail includes @, and a domain! Like @gmail.com";
+let successMessage = "Message send succesfully!";
 
 NEInputs.forEach( (inp) => {
     inp.addEventListener('keydown', (event) => {
@@ -65,9 +67,11 @@ btn.addEventListener('click', () => {
     })
     .then(response => {
         if (response.status == 200){
-            window.alert("Message sent succesfully!")
+            successMsg.textContent = successMessage;
+            setTimeout(() => successMsg.textContent = "", 5000)
         }else{
-            window.alert("Message was NOT sent!")
+            errMsg.textContent = "Message was NOT sent, an error occured!";
+            setTimeout(() => errMsg.textContent = "", 5000)
         }
         who.value = "";
         mail.value = "";

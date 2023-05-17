@@ -145,6 +145,10 @@ aside .inputInUse, .contactUs input:focus, .contactUs textarea:focus{
     color: red;
 }
 
+.contactSuccessMessage{
+    color: rgb(123, 195, 15);
+}
+
 aside .wrongInput{
     outline: 2px solid red;
 }
