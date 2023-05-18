@@ -14,6 +14,14 @@ const showScroll = function(){
         nav.classList.add('navBG');
         navBG=true;
     }
+    if (window.scrollY < size){
+        if (window.innerWidth > 850){
+            nav.classList.remove('navBG');
+        }else if (menuIsOpen){
+            nav.classList.add('navBG');
+        }
+    }
+
     if (navBG && window.scrollY < size){
         navBG = false;
         if (!menuIsOpen){
@@ -47,10 +55,5 @@ openMenu.addEventListener('click', () => {
     }
 });
 
-setTimeout(() => {
-    document.querySelector('.navLogo').classList.remove('fadeLogo');
-}, 700);
 
-setTimeout( () => {
-    document.querySelectorAll('.fadeLinks').forEach( el => el.classList.remove('fadeLinks'));
-}, 300);
+setTimeout(() => {linksMenu.classList.remove('fadeLinks')}, 1500);

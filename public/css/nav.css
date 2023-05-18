@@ -42,6 +42,7 @@ nav .navLogo{
 
 .navBG{
     background-color: var(--secondary-color);
+    transition: all 0.7s;
 }
 
 nav .menuIcon{
@@ -79,14 +80,48 @@ body nav .openedMenuIcon div:last-child{
     
 } 
 
+@keyframes slideFromLeft {
+    from{
+        transform: translateX(-300px);
+        filter: blur(10px);
+    }
+    to{
+        transform: translateX(0);
+        filter: blur(0px);
+    }
+}
+
+@keyframes slideFromRight {
+    from{
+        transform: translateX(500px);
+        filter: blur(10px);
+    }
+    to{
+        transform: translateX(0);
+        filter: blur(0px);
+    }
+}
+
+@keyframes slideFromUp {
+    from{
+        /* transform: rotateX(90deg); */
+        transform: translateY(-300px);
+        filter: blur(10px);
+    }
+    to{
+        /* transform: rotateX(0); */
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+    
+}
+
 nav .fadeLogo{
-    transform: translateX(-300px);
-    filter: blur(10px);
+    animation: slideFromLeft 1s 0.7s backwards;
 }
 
 nav .fadeLinks{
-    transform: translateX(500px);
-    filter: blur(10px);
+    animation: slideFromRight 1s 0.7s backwards;
 }
 
 
@@ -96,7 +131,13 @@ nav .fadeLinks{
         display: block;
     }
 
+    
+    nav .slideFromUp{
+        animation: slideFromUp 0.7s backwards;
+    }
+
     body nav .links{
+        z-index: 8;
         border-top: 2px solid var(--accent-color);
         flex-direction: column;
         position: fixed;
