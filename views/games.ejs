@@ -6,18 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holdup Nevus | Games</title>
 
+    <link rel="icon" type="image/x-icon" href="/img/webPhotos/logo.png">
+
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/games.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 
-    <% function teamTemplate(role, name) {
-    return `<section>
-        <img src="/img/roles/${role}.png" width="50" height="50">
+    <nav class="navBG">
+        <a href="/">
+            <div>
+                <span class="material-symbols-outlined">
+                arrow_back
+                </span>
+                <p>BACK</p>
+            </div>
+        </a>
+        <section class="navLogo">
+            <img src="/img/webPhotos/logo.png" alt="" title=""
+            width="60" height="60"/>
+            <h2>Holdup Nevus</h2>
+        </section>
+    </nav>
+
+    <% const lANE_ICON_SIZE = 50; 
+    function teamTemplate(win, role, name) {
+    if (win){
+        return `<section class="wrapPlayer">
+        <p>${name}</p>
+        <img class="roleImg" src="/img/roles/${role}.png" width="50" height="50">
+    </section>`;
+    }
+    return `<section class="wrapPlayer">
+        <img class="roleImg" src="/img/roles/${role}.png" width="50" height="50">
         <p>${name}</p>
     </section>`;
     }
+    console.log(matches[0])
+    const LOGO_SIZE = 100;
     %>
+
+    <main>
 
     <% matches.forEach( match => { %>
         <% ///// Dividing players for winners and losers /////
@@ -32,23 +63,39 @@
         }) %>
 
         
+
         <section class="wrapMatch">
-        <a href="/game/<%= match.metadata.matchId %>">
-            <section class="winnersWrap">
+            <section class="showTeam">
+            <% if (match.win) {%>
+            <img class="winImg" src="/img/webPhotos/logo.png" alt="" title="" 
+            width="<%= LOGO_SIZE %>" height="<%= LOGO_SIZE %>"/>
+            <%}%>
+            </section>
+            <section class="winners wrapTeam">
                 <% winners.forEach( info => {%>
-                    <%- teamTemplate(info.teamPosition, info.summonerName) %>
+                    <%- teamTemplate(false, info.teamPosition, info.summonerName) %>
                 <%})%>
             </section>
-            <section class="losersWrap">
+            <a class="details" href="/game/<%= match.metadata.matchId %>">See details</a>
+            <section class="losers wrapTeam">
                 <% losers.forEach( info => {%>
-                    <%- teamTemplate(info.teamPosition, info.summonerName) %>
+                    <%- teamTemplate(false, info.teamPosition, info.summonerName) %>
                 <%})%>
             </section>
-        </a>  
-        </section>
+            
+            <section class="showTeam">
+            <% if (!match.win) {%>
+            <img class="loseImg" src="/img/webPhotos/logo.png" alt="" title="" 
+            width="<%= LOGO_SIZE %>" height="<%= LOGO_SIZE %>"/>
+            <%}%>
+            </section>
+            
+        </section>  
         
     <%})%>
+    </main>
 
+    <%- include('./partials/footer.ejs')%>
 
 </body>
 </html>

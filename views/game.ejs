@@ -13,6 +13,8 @@
 <body>
 
     <% 
+    const version = "13.12.1"
+
     function playerRowsTemplate(player){
         let items = ``;
         for (let i=0; i<7; i++){
@@ -55,14 +57,14 @@
     }
     
     /////// Champions
-    let champIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/champion/";
+    let champIconLink = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/`;
     let chamIconSize = 50;
     //Items
-    let itemIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/item/";
+    let itemIconLink = `http://ddragon.leagueoflegends.com/cdn/${version}/img/item/`;
     let itemIconSize = 35; 
     
     /// Summs
-    let summsIconLink = "http://ddragon.leagueoflegends.com/cdn/13.9.1/img/spell/";
+    let summsIconLink = `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/`;
     let summsIconSize = 25;
     
     /// Runes

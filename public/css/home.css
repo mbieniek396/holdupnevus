@@ -28,13 +28,11 @@ h1{
     font-size: 3rem;
 }
 
-footer{
-    background-color: var(--secondary-color);
-    margin-top: 5rem;
-    color: var(--primary-color);
-    display: grid;
-    place-content: center;
-    min-height: 100px;
+
+
+.sectionTitle{
+    font-size: 3rem;
+    color: var(--accent-color);
 }
 
 
@@ -95,6 +93,43 @@ footer{
     max-width: 70ch;
     font-size: 1.2rem;
 }
+
+.gamesPart{
+    width: 100%;
+    padding-top: 12rem;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    transform: skewY(5deg);
+}
+
+.gamesPart section{
+    width: 80%;
+    transform: skewY(-5deg);
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+.gamesPart h2{
+    text-align: center;
+}
+
+.gamesPart article{
+    margin: 2rem 0;
+    font-size: 1.2rem;
+}
+
+.gamesPart .btn{
+    font-size: 2rem;
+    width: 200px;
+    align-self: center;
+    text-align: center;
+    text-decoration: none;
+}
+
 
 .contactUs{
     padding: 11% 0;
@@ -167,9 +202,10 @@ aside .wrongInput{
     color: var(--accent-color);
 }
 
-#submit{
+.btn{
     padding: 0.5rem 2.4rem;
     border-radius: 2px;
+    display: block;
     border: none;
     background-color: var(--accent-color);
     color: var(--secondary-color);
@@ -177,7 +213,7 @@ aside .wrongInput{
     font-family: Righteous,Arial,sans-serif;
 }
 
-#submit:hover{
+.btn:hover{
     outline: 2px solid var(--accent-color);
     outline-offset: -4px;
     background-color: var(--secondary-color);
@@ -325,7 +361,12 @@ aside .wrongInput{
 
     .contactUs article h1{
         text-align: center;
-    };
+    }
+
+    .gamesPart{
+        height: 700px;
+    }
+
 
 }
 
@@ -347,6 +388,10 @@ aside .wrongInput{
     .aboutUsItem img{
         width: 200px;
         height: 200px;
+    }
+
+    .gamesPart{
+        padding-top: 9rem;
     }
 
     
@@ -385,7 +430,11 @@ aside .wrongInput{
 
     .contactUs article h1{
         font-size: 2.5rem;
-    };
+    }
+
+    .gamesPart{
+        padding-top: 3rem;
+    }
 
     
 }

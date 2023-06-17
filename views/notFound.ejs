@@ -6,11 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Page NOT FOUND!</title>
 
-    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="icon" type="image/x-icon" href="/img/webPhotos/logo.png">
+
+    <link rel="stylesheet" href="/css/notFound.css">
+    <link rel="stylesheet" href="/css/nav.css">
+
+
+
+    <script src="/js/nav.js" defer></script>
+    <script defer>
+    </script>
+    
 </head>
 <body>
 
+    <%- include('./partials/mainNav.ejs') %>
+
     <h1>Page does NOT exist!</h1>
-    
+
+    <%- include('./partials/footer.ejs')%>
+
 </body>
 </html>

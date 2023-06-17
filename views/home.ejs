@@ -16,25 +16,7 @@
 </head>
 <body>
 
-    <nav>
-        <section class="navLogo fadeLogo">
-            <img src="/img/webPhotos/logo.png" alt="" title=""
-            width="60" height="60">
-            <h2>Holdup Nevus</h2>
-        </section>
-        <div class="menuIcon fadeLinks">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <section class="hide slideFromUp links fadeLinks">
-            <a href="#main">Home</a>
-            <a href="#aboutUs">About us</a>
-            <a href="#">Members</a>
-            <a href="#">Games</a>
-            <a href="#contactUs">Contact us</a>
-        </section>
-    </nav>
+    <%- include('./partials/mainNav.ejs') %>
 
     
     <section class="main" id="main">
@@ -71,8 +53,13 @@
             </section>
         </section>
 
-        <div class="div">
-        </div>
+        <section id="gamesPart" class="gamesPart">
+            <section>
+                <h2 class="hideFromRight sectionTitle">Check out our games!</h2>
+                <article class="hideFromLeft">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</article>
+                <a class="btn" href="/games">GAMES</a>
+            </section>
+        </section>
 
         <section class="contactUs" id="contactUs">
                 <article class="hideFromRight">
@@ -95,17 +82,13 @@
                     </div>
                     <p class="contactErrorMessage"></p>
                     <p class="contactSuccessMessage"></p>
-                    <button id="submit">SEND</button>
+                    <button id="submit" class="btn">SEND</button>
                 </aside>
 
         </section>
     </main>
 
-    <footer>
-        <section>
-            <p>Holdup Nevus 2023 &#169;All Rights Reserved</p>
-        </section>
-    </footer>
+    <%- include('./partials/footer.ejs')%>
 
     
     <script src="/js/home.js">

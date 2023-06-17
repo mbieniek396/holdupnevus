@@ -1,56 +1,284 @@
+@import url(mainSettings.css);
 
-a{
-    text-decoration: none;
-    color: none;
-    display: flex;
-    justify-content: space-evenly;
-    transition: all 0.5s;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-a:hover{
-    opacity: 0.7;
-    filter: blur(5px);
-    transition: all 0.5s;
-}
-
-.wrapMatch{
-    margin-top: 1rem;
-    border: 2px solid black;
+nav{
+    position: fixed;
     overflow: hidden;
+    top:0;
+    left:0;
+    min-height: 4rem;
+    z-index: 10;
+    width: 100%;
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.winnersWrap, .losersWrap{
-    min-width: 300px;
+nav .navLogo{
+    display: flex;
+    align-items: center;
+    transition: all 1s;
+    margin-right: 2rem;
+}
+
+.navBG{
+    background-color: var(--secondary-color);
+    transition: all 0.7s;
+}
+
+nav a{
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    
+}
+
+nav a div{
+    display: flex;
+    padding: 0.3rem 0.7rem;
+    background: var(--accent-color);
+    border-radius: 30px;
+    align-items: center;
+    transition: background-color 0.5s;
+    outline: none
+}
+
+nav a:hover, nav a:focus{
+    opacity: 1;
+    letter-spacing: 0.2rem;
+    filter: none;
+    color: var(--accent-color);
+    
+}
+
+nav a:hover div span, nav a:focus div span{
+    margin-right: .5rem;
+    transition: margin-right 0.5s;
+}
+
+nav a:hover div, nav a:focus div{
+    background-color: var(--secondary-color);
+    transition: background-color 0.5s;
+    outline: 2px solid var(--accent-color);
+}
+
+nav a div span{
+    transition: margin-right 0.5s;
+}
+
+body{
+    font-family: Righteous,Arial,sans-serif;
+    background: var(--secondary-color);
+
+}
+
+main{
+    margin-top: 76px;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     align-items: center;
-    gap: 0.5rem;
-    padding: .5rem;
-    font-weight: 800;
+    justify-content: center;
 }
 
-.winnersWrap p, .losersWrap p{
-    display: grid;
-    place-content: center;
-}
 
-.winnersWrap section, .losersWrap section{
+
+.wrapMatch{
+    text-decoration: none;
+    color: var(--primary-color);
     display: flex;
     justify-content: space-evenly;
+    outline: none;
+    transition: all 0.5s;
+}
+
+.wrapMatch:hover .winners{
+    transform: translateX(-50px);
+    transition: all 0.5s;
+}
+.wrapMatch:hover .losers{
+    transform: translateX(50px);
+    transition: all 0.5s;
+}
+
+.wrapMatch:hover .details{
+    opacity: 1;
+    transition: all 0.5s, opacity 1s 0.05s;
+}
+
+.losers, .winners{
+    transform: translateX(0);
+    transition: all 0.5s;
+}
+
+
+.wrapPlayer{
+    display: flex;
+    align-items: center;
     gap: 1rem;
 }
 
-
-.winnersWrap{
-    background-color: rgb(34, 119, 229);
-    border-right: 2px solid black;
-    text-shadow: 0 0 3px black;
-    color:rgb(160, 208, 255)
+.wrapTeam{
+    width: 200px;
 }
 
-.losersWrap{
-    background-color: rgb(232, 31, 31);
-    color:rgb(16, 17, 17);
-    text-shadow: 0 0 3px white;
+.details{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    opacity: 0;
+    padding: 1rem;
+    background-color: var(--accent-color);
+    transition: all 0.5s;
+    transform: translate(-20%, -50%);
+    border-radius: 2px;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.details:hover{
+    border: 1px solid var(--accent-color);
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.wrapMatch{
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    gap:10vw;
+}
+
+.showTeam{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.winImg{
+    transform: translateX(70%);
+}
+
+.loseImg{
+    transform: translateX(-70%);
+}
+
+.winImg, .loseImg{
+    transition: all 0.5s;
+}
+
+
+
+body footer{
+    border-top: 2px solid var(--accent-color);
+}
+
+
+@media screen and (max-width: 1250px){
+
+    .wrapMatch:hover .winImg{
+        transform: translateX(0);
+        transition: all 0.5s;
+    }
+
+    .wrapMatch:hover .loseImg{
+        transform: translateX(0);
+        transition: all 0.5s;
+    }
+
+}
+
+
+@media screen and (max-width: 900px){
+
+    .wrapMatch{
+        gap: 5vw;
+    }
+
+    .winImg{
+        transform: translateX(20%);
+    }
+}
+
+@media screen and (max-width: 730px){
+
+    .winImg, .loseImg{
+        width: 60px;
+        height: 60px;
+    }
+
+    .roleImg{
+        width: 40px;
+        height: 40px;
+    }
+
+    nav a{
+        font-size: 1.2rem;
+    }
     
+    main{
+         overflow: hidden; 
+    }
+    
+    .details{
+        width: 110vw;
+        height: 100%; 
+        background-color: var(--secondary-color);
+        display: grid;
+        place-content: center;
+    }
+
+    .wrapMatch:hover .details{
+        opacity: 1;
+        left: 0;
+        z-index: 1;
+        filter: blur(-5px);
+        transition: all 0.5s, opacity 1s 0.05s;
+    }
+
+    .showTeam{
+        display: none;
+    }
+    
+}
+
+
+@media screen and (max-width: 576px){
+
+    .wrapMatch:hover .details{
+        left: 5%;
+    }
+
+}
+
+@media screen and (max-width: 456px){
+    .roleImg{
+        width: 20px;
+        height: 20px;
+    }
+
+    body{
+        font-size: 0.8rem;
+    }
+
+    .wrapMatch{
+        gap: 2vw;
+    }
+
+    .wrapTeam{
+        width: 140px;
+    }
+
+    .wrapPlayer{
+        gap:0.4rem
+    }
 }

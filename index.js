@@ -144,6 +144,9 @@ async function refreshMatchesData(){
     
                     }
 
+                    let me = response.info.participants.filter((p) => p.puuid === "4hMaaZ_gOQ3raaAYwIetAWMul0SykB9gNug5cz9h_3HDUuzZ32n2m_49nr3aThN3ro5llCDvwXiBFw")
+                    response["win"] = me[0].win
+
                     if(goodMatch){
                         tempData.push(response)
                     }
@@ -235,6 +238,8 @@ async function initMatchesData(){
 
                 }
                 
+                let me = response.info.participants.filter((p) => p.puuid === "4hMaaZ_gOQ3raaAYwIetAWMul0SykB9gNug5cz9h_3HDUuzZ32n2m_49nr3aThN3ro5llCDvwXiBFw")
+                response["win"] = me[0].win
 
                 if (goodMatch){ 
                     if (tempData.push(response) === 20){
@@ -353,6 +358,7 @@ app.get("/game/:id", (req,res) =>{
 
    
 });
+
 
 
 app.post('/sendContactMessage', (req, res) =>{
