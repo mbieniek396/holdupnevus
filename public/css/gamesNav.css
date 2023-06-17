@@ -1,0 +1,68 @@
+@import url(mainSettings.css);
+
+nav{
+    position: fixed;
+    overflow: hidden;
+    top:0;
+    left:0;
+    min-height: 4rem;
+    z-index: 10;
+    width: 100%;
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .navLogo{
+    display: flex;
+    align-items: center;
+    transition: all 1s;
+    margin-right: 2rem;
+}
+
+.navBG{
+    background-color: var(--secondary-color);
+    transition: all 0.7s;
+}
+
+nav a{
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    
+}
+
+nav a div{
+    display: flex;
+    padding: 0.3rem 0.7rem;
+    background: var(--accent-color);
+    border-radius: 30px;
+    align-items: center;
+    transition: background-color 0.5s;
+    outline: none
+}
+
+nav a:hover, nav a:focus{
+    opacity: 1;
+    letter-spacing: 0.2rem;
+    filter: none;
+    color: var(--accent-color);
+    
+}
+
+nav a:hover div span, nav a:focus div span{
+    margin-right: .5rem;
+    transition: margin-right 0.5s;
+}
+
+nav a:hover div, nav a:focus div{
+    background-color: var(--secondary-color);
+    transition: background-color 0.5s;
+    outline: 2px solid var(--accent-color);
+}
+
+nav a div span{
+    transition: margin-right 0.5s;
+}
