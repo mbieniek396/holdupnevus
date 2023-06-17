@@ -44,7 +44,11 @@ let team = [
 let roleOrder = {"TOP": 1, "JUNGLE":2, "MIDDLE":3, "BOTTOM":4, "SUPPORT":5};
 
 async function loadRunesObject(){
-    response = await fetch(`http://ddragon.leagueoflegends.com/cdn/12.16.1/data/en_US/runesReforged.json`);
+    try{
+        response = await fetch(`http://ddragon.leagueoflegends.com/cdn/12.16.1/data/en_US/runesReforged.json`);
+    }catch (e){
+        return console.log(e);
+    }
     if (response.status != 200){
         console.error("Runes table not loaded! There was something wrong with this request");
         console.error(response);
@@ -64,7 +68,11 @@ async function loadRunesObject(){
 //============ LOAD SUMMONER SPELLLS OBJECT =============
 /////////////////////////////////////////////////////////
 async function loadSummonerSpellsObject(){
-    response = await fetch(`http://ddragon.leagueoflegends.com/cdn/13.9.1/data/en_US/summoner.json`);
+    try{
+        response = await fetch(`http://ddragon.leagueoflegends.com/cdn/13.9.1/data/en_US/summoner.json`);
+    }catch (e){
+        return console.log(e);
+    }
     if (response.status != 200){
         console.error("Summoner spells table not loaded! There was something wrong with this request");
         console.error(response);
@@ -99,7 +107,11 @@ async function refreshMatchesData(){
         let tempData = []
         var proccessed = 0
 
-        response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${myPUUID}/ids?start=0&count=3&api_key=${riotKey}`);
+        try{
+            response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${myPUUID}/ids?start=0&count=3&api_key=${riotKey}`);
+        }catch (e){
+            return console.log(e);
+        }
         if (response.status != 200){
             console.error("There was something wrong with finding matches of PUUID player");
             console.error(response);
@@ -111,7 +123,11 @@ async function refreshMatchesData(){
         await new Promise( (resolve) => {
             Array.from(matches).forEach( async match => {
                 if (!matchNameList.includes(match)){
-                    response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${riotKey}`);
+                    try{
+                        response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${riotKey}`);
+                    }catch (e){
+                        return console.log(e);
+                    }
                     if (response.status != 200){
                         console.error("Could not load data from game "+match);
                         console.error(response);
@@ -192,7 +208,12 @@ async function initMatchesData(){
         proccessed = 0;
         await new Promise(res => setTimeout(res, 1000)); //Await for 1 sec cause of 20calls per sec limit
 
-        response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${myPUUID}/ids?start=${start}&count=19&api_key=${riotKey}`);
+        try{
+            response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${myPUUID}/ids?start=${start}&count=19&api_key=${riotKey}`);
+        }catch (e){
+            return console.log(e);
+        }
+       
         if (response.status != 200){
             console.error("There was something wrong with finding matches of PUUID player");
             console.error(response);
@@ -203,7 +224,12 @@ async function initMatchesData(){
         await new Promise( (resolve) => {
             Array.from(matches).forEach( async match => {
             
-                response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${riotKey}`);
+                try{
+                    response = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${riotKey}`);
+                }catch (e){
+                    return console.log(e);
+                }
+               
                 if (response.status != 200){
                     console.error("Could not load data from game "+match);
                     console.error(response);

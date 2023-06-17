@@ -76,6 +76,7 @@ nav a div span{
 body{
     font-family: Righteous,Arial,sans-serif;
     background: var(--secondary-color);
+    min-height: 100vh;
 
 }
 
