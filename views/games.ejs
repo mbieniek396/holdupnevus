@@ -10,26 +10,27 @@
 
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/games.css">
+    <link rel="stylesheet" href="/css/gamesNav.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 
     <nav class="navBG">
-        <a href="/">
-            <div>
-                <span class="material-symbols-outlined">
-                arrow_back
-                </span>
-                <p>BACK</p>
-            </div>
-        </a>
-        <section class="navLogo">
-            <img src="/img/webPhotos/logo.png" alt="" title=""
-            width="60" height="60"/>
-            <h2>Holdup Nevus</h2>
-        </section>
-    </nav>
+    <a href="/">
+        <div>
+            <span class="material-symbols-outlined">
+            arrow_back
+            </span>
+            <p>BACK</p>
+        </div>
+    </a>
+    <section class="navLogo">
+        <img src="/img/webPhotos/logo.png" alt="" title=""
+        width="60" height="60"/>
+        <h2>Holdup Nevus</h2>
+    </section>
+</nav>
 
     <% const lANE_ICON_SIZE = 50; 
     function teamTemplate(win, role, name) {
@@ -50,6 +51,7 @@
     <main>
 
     <% matches.forEach( match => { %>
+
         <% ///// Dividing players for winners and losers /////
         let losers = [] 
         let winners = []

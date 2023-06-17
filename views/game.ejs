@@ -6,12 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holdup Nevus | Game</title>
 
+    <link rel="icon" type="image/x-icon" href="/img/webPhotos/logo.png">
 
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/gameStyle.css">
+    <link rel="stylesheet" href="/css/gamesNav.css">
+
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 
+    <nav class="navBG">
+    <a href="/games">
+        <div>
+            <span class="material-symbols-outlined">
+            arrow_back
+            </span>
+            <p>BACK</p>
+        </div>
+    </a>
+    <section class="navLogo">
+        <img src="/img/webPhotos/logo.png" alt="" title=""
+        width="60" height="60"/>
+        <h2>Holdup Nevus</h2>
+    </section>
+    </nav>
+
+    <main>
     <% 
     const version = "13.12.1"
 
@@ -20,10 +41,10 @@
         for (let i=0; i<7; i++){
             if (player["item"+i] != 0) {
             items+=`<img width="${itemIconSize}" height="${itemIconSize}"
-        src="${itemIconLink}${player["item"+i]}.png">`
+        src="${itemIconLink}${player["item"+i]}.png" class="itemIcon">`
             }else{
-                items+=`<div class="emptyItem" style="width: ${itemIconSize}px;
-                 height: ${itemIconSize}px;"></div>`
+                items+=`<div class="emptyItem itemIcon" style="width: ${itemIconSize}px;
+                 height: ${itemIconSize}px;"></div> `
             }
         }
 
@@ -40,15 +61,25 @@
                 <img width="${runesIconSize-8}" height="${runesIconSize-8}"
             src="${runesIconLink}${runes[player.perks.styles[1].style]}">
             </section>
-            
-            <p class="championLevel centerContent textSize1_5">${player.champLevel}</p>
-            <div class="containChampionIcon" style="width: ${chamIconSize}px; height: ${chamIconSize}px;">
-            <img width="${chamIconSize}" height="${chamIconSize}" title="${player.championName}"
-            src="${champIconLink}${player.championName}.png">
-            </div>
-            <p class="summonerName">${player.summonerName}</p>
-            <section class="items">
-                ${items}
+            <section class="champSummonerStats">
+                <article class="iconLevel">
+                <p class="championLevel centerContent textSize1_5">${player.champLevel}</p>
+                <div class="containChampionIcon" style="width: ${chamIconSize}px; height: ${chamIconSize}px;">
+                <img width="${chamIconSize}" height="${chamIconSize}" title="${player.championName}"
+                src="${champIconLink}${player.championName}.png" class="championIcon">
+                </div>
+                </article>
+                <p class="summonerName">${player.summonerName}</p>
+            </section>
+            <section class="itemsStats">
+                <section class="items">
+                    ${items}
+                </section>
+                <section class="statsInItems">
+                    <p class="stats centerContent textSize1_5">${player.kills}/<span>${player.deaths}</span>/${player.assists}</p>
+                    <p class="minionsKilled centerContent">${ player.totalMinionsKilled + player.neutralMinionsKilled }</p>
+                    <p class="goldEarned centerContent textSize1_5">${player.goldEarned.toString().slice(0, -3)},${player.goldEarned.toString().slice(-3)}</p>
+                </section>
             </section>
             <p class="stats centerContent textSize1_5">${player.kills}/<span>${player.deaths}</span>/${player.assists}</p>
             <p class="minionsKilled centerContent">${ player.totalMinionsKilled + player.neutralMinionsKilled }</p>
@@ -109,6 +140,9 @@
                 </section>
             </section>
         </article>
+    </main>
+
+    <%- include('./partials/footer.ejs')%>
 
 </body>
 </html>
