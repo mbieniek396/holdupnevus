@@ -11,6 +11,7 @@ let successMsg = document.querySelector(".contactSuccessMessage");
 let emailErrMsg = "Make sure your mail includes @, and a domain! Like @gmail.com";
 let successMessage = "Message send succesfully!";
 
+
 NEInputs.forEach( (inp) => {
     inp.addEventListener('keydown', (event) => {
         if (event.srcElement.value+event.key){
