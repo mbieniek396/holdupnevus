@@ -17,7 +17,7 @@ const app = express()
 /////////////////////////////////////////////////////////
 ///////////// REFRESH SETTINGS //////////////////////////
 /////////////////////////////////////////////////////////
-const MIN_REFRESH_TIME = 1
+const MIN_REFRESH_TIME = 2
 const LOOP_REFRESH_TIME = 20
 
 ////////////////////////////////////////////////////
@@ -33,15 +33,27 @@ var matchesData = [];
 var matchNameList = [];
 var summs = {};
 var runes = {};
-let myPUUID = "4hMaaZ_gOQ3raaAYwIetAWMul0SykB9gNug5cz9h_3HDUuzZ32n2m_49nr3aThN3ro5llCDvwXiBFw";
-let team = [
-    "4hMaaZ_gOQ3raaAYwIetAWMul0SykB9gNug5cz9h_3HDUuzZ32n2m_49nr3aThN3ro5llCDvwXiBFw",//wh1t3xD
-    "oYYf3Gijl3fFEQM36oQnupOjSh3AmPnqkZOg1jQY61Pot5tmcL3aZvv4EHpJvlrTniUvoxyE24Bb_g",//TomsoniakPL
-    "an_xMRZNAPa56Y8vJcTPG90nAMJbD-eRhDsKfgjtcm4_QXgYebRWjwaEyUFJafWgtrTMfygRWbFbFw",//Faillonis
-    "2TwgZZqQpOJOmFKk-sB4g9T4vFvOvGaxCvsqQ85E_JAWCUTMIfSzeey1ssQTo4FS8WXrnV_eC4tUHQ",//KAJXXX
-    "PLouDnGvVAfpbh0ncXftLWwUEZOK0Rtszms6MZ2Pu5FHhWdOTYpvjRbEqixx-SV8L3ChEbMwaVSMIg"//Mninja57
-];
+let myPUUID = "C4k45DNQ3te6q3LCyLlvbNIIMVtDbvcJ0UekontTZigce3BAY6gmJOFfp3wt2zcgdPPO28odWlG8ZA";
+let team = [];
 let roleOrder = {"TOP": 1, "JUNGLE":2, "MIDDLE":3, "BOTTOM":4, "SUPPORT":5};
+
+
+async function loadTeam(){
+    let names = ["wh1t3xD", "ToN0", "Faillonis", "KAJXXX", "Mninja57"]
+    for await (let name of names){
+        let response = await fetch(`https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=RGAPI-f359733f-1ab4-403b-90c2-b2d5a3c67331`);
+        if (response.status != 200){
+            console.error(`Colud not find player named ${name}`);
+            console.error(response);
+            return;
+        }
+        response = await response.json();
+        console.log(response);
+        team.push(response.puuid);
+    }
+    myPUUID = team[0];
+    console.log(team);
+}
 
 async function loadRunesObject(){
     response = await fetch(`http://ddragon.leagueoflegends.com/cdn/12.16.1/data/en_US/runesReforged.json`);
@@ -238,7 +250,7 @@ async function initMatchesData(){
 
                 }
                 
-                let me = response.info.participants.filter((p) => p.puuid === "4hMaaZ_gOQ3raaAYwIetAWMul0SykB9gNug5cz9h_3HDUuzZ32n2m_49nr3aThN3ro5llCDvwXiBFw")
+                let me = response.info.participants.filter((p) => p.puuid === myPUUID)
                 response["win"] = me[0].win
 
                 if (goodMatch){ 
@@ -327,9 +339,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 
-app.listen(8003, () =>{
+app.listen(8003, async () =>{
     console.log("Server started, currently listening on http://localhost:8003");
     console.log(`Server started on ${new Date()}`);
+    await loadTeam();
     initMatchesData();
     loadSummonerSpellsObject();
     loadRunesObject();
